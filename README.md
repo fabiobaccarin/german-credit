@@ -35,6 +35,14 @@ This repository adheres to a few conventions and guidelines:
       reports, so that the user does not have to guess what they mean by looking
       at their file names only.
 
+## About the problem
+
+Our objective is to develop a machine learning model that predicts the risk of
+the bank's customer defaulting on the credit lent to them. This model is what we
+call *credit scoring model*. When building this model, we are optimizing for
+the bank's profitability according to a few [key assumptions]. We provide
+evidence supporting them in the `reports/` directory.
+
 [German credit dataset]: https://www.openml.org/d/31
 [OpenML]: https://www.openml.org/
 [Markdown]: https://www.markdownguide.org/
