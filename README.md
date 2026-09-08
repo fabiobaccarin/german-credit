@@ -57,8 +57,8 @@ the dataset we are using, but it makes a reasonable assumption nonetheless.
 
 We assume a customer's relevance for our problem is directly proportional to
 the exposure amount the bank has with them. A customer for whom the bank lent
-10 thousand German Marks is twice more relevant to our problem than a customer
-for whom the bank lent 5 thousand German Marks. It is not desirable to make
+10 thousand Deutsche Marks is twice more relevant to our problem than a customer
+for whom the bank lent 5 thousand Deutsche Marks. It is not desirable to make
 these two customers equally important for our credit model because that would
 not optimize the bank's profitability.
 
