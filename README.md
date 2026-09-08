@@ -43,6 +43,25 @@ call *credit scoring model*. When building this model, we are optimizing for
 the bank's profitability according to a few [key assumptions]. We provide
 evidence supporting them in the `reports/` directory.
 
+## Key assumptions
+
+### Key assumption 1: Cost asymmetry of errors
+
+We assume that our model's errors imply different costs for the bank. In
+particular, we assume that **approving a bad customer is 5 times worse than
+refusing a good customer**. This is the same cost structure that comes with
+the dataset we are using, but it makes a reasonable assumption nonetheless.
+
+### Key assumption 2: Exposure relevance
+
+We assume a customer's relevance for our problem is directly proportional to
+the exposure amount the bank has with them. A customer for whom the bank lent
+10 thousand German Marks is twice more relevant to our problem than a customer
+for whom the bank lent 5 thousand German Marks. It is not desirable to make
+these two customers equally important for our credit model because that would
+not optimize the bank's profitability.
+
+
 [German credit dataset]: https://www.openml.org/d/31
 [OpenML]: https://www.openml.org/
 [Markdown]: https://www.markdownguide.org/
