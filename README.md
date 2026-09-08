@@ -44,6 +44,13 @@ call *credit scoring model*. When building this model, we are optimizing for
 the bank's profitability according to a few [key assumptions]. We provide
 evidence supporting them in the `reports/` directory.
 
+## About the data
+
+Our dataset consists of 1_000 rows and 21 columns. Each row represents a
+customer that applied for a credit from the bank in Germany in 1994. The
+[dataset's croissant file] provides a complete description of the data, while
+here we describe briefly each column in the dataset.
+
 ## Key assumptions
 
 ### Key assumption 1: Cost asymmetry of errors
