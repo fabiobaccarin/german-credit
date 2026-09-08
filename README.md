@@ -69,3 +69,4 @@ not optimize the bank's profitability.
 [Design by contract]: https://en.wikipedia.org/wiki/Design_by_contract
 [Google Markdown style guide]: https://google.github.io/styleguide/docguide/style.html
 [Google Python style guide]: https://google.github.io/styleguide/pyguide.html
+[key assumptions]: #key-assumptions
