@@ -33,5 +33,6 @@ This repository adheres to a few conventions and guidelines:
 [OpenML]: https://www.openml.org/
 [Markdown]: https://www.markdownguide.org/
 [Python]: https://www.python.org/
+[Design by contract]: https://en.wikipedia.org/wiki/Design_by_contract
 [Google Markdown style guide]: https://google.github.io/styleguide/docguide/style.html
 [Google Python style guide]: https://google.github.io/styleguide/pyguide.html
