@@ -21,7 +21,6 @@ This repository adheres to a few conventions and guidelines:
    particular, we follow the [Google Markdown style guide] and the
    [Google Python style guide].
 4. **Index files.** We call Markdown files used as entrypoints to other Markdown
-   files as *index files*. The are creatively named `index.md`. There are 2
    files as *index files*. The are creatively named `index.md`. There are 4
    index files in the project:
    1. `german_credit/index.md`: this file contains structions for AI to generate
