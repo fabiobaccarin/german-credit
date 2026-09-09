@@ -125,6 +125,13 @@ $$
 \lambda = \frac{L^{*}}{N}
 $$
 
+## Splitting strategy
+
+The dataset will be split in a 80/20 fashion: 80% of the dataset will be used
+to train the model and the remaining 20% will be used to test its generalization
+capabilities and fairness. We will explore other splittings such as 70/30, 60/40
+and 50/50 to understand how the model behaves.
+
 [expected credit loss]: https://primaconsulting.org/ecl-model-ifrs-9-examples/
 [Assumptions]: #assumptions
 [splitting strategy]: #splitting-strategy
