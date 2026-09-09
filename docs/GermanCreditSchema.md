@@ -85,9 +85,9 @@ savings account, in Deutsche Marks.
 **Type:** Categorical
 
 **Possible values**:
+* `"<100"`
 * `"100<=X<500"`
 * `"500<=X<1000"`
-* `"<100"`
 * `">=1000"`
 * `"no known savings"`
 
