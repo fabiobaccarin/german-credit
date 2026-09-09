@@ -157,6 +157,107 @@ performs across different marital stata.
 * `"mar/wid"`
 * `"single"`
 
+## Other parties involved
+
+**Name:** `other_parties`
+
+**Description:** Describes whether there are other parties besides the costumer
+associated. This can show, for example, if there are any third party guarantors
+in case the customer defaults.
+
+**Type:** Categorical
+
+**Possible values:**
+* `"co applicant"`
+* `"guarantor"`
+* `"none"`
+
+## Property
+
+**Name:** `property_magnitude`
+
+**Description:** Describes the kind of property the customer has and that can
+be used as collateral for the loan.
+
+**Type:** Categorical
+
+**Possible values:**
+* `"car"`
+* `"life insurance"`
+* `"no known property"`
+* `"real estate"`
+
+## Customer leverage
+
+**Name:** `other_payment_plans`
+
+**Description:** Describes whether the customer has other debts, whether with
+the bank or with stores in general.
+
+**Type:** Categorical
+
+**Possible values:**
+* `"bank"`
+* `"none"`
+* `"stores"`
+
+## Housing
+
+**Name:** `housing`
+
+**Description:** Describes the kind of housing the customer has.
+
+**Type:** Categorical
+
+**Possible values:**
+* `"for free"`
+* `"own"`
+* `"rent"`
+
+## Job status
+
+**Name:** `job`
+
+**Description:** Describes the kind of employee the customer is.
+
+**Type:** Categorical
+
+**Possible values:**
+* `"high qualif/self emp/mgmt"`
+* `"skilled"`
+* `"unemp/unskilled non res"`
+* `"unskilled resident"`
+
+## Owns telephone
+
+**Name:** `own_telephone`
+
+**Description:** Returns `yes` if the customer owns a telephone; otherwise,
+returns `none`.
+
+**Type:** String/Boolean
+
+## Is foreign worker
+
+**Name:** `foreign_worker`
+
+**Description:** Returns `yes` if the customer is not a citizen of the republic
+of Germany; otherwise, returns `no`. This variable is also illegal to use today
+without proper presentation of compelling evidence of its relevance and will be
+used to gauge the model's fairness amongst different demographic groups. See
+also [gender and marital status column].
+
+**Type:** String/Boolean
+
+## Target
+
+**Name:** `class`
+
+**Description:** Returns `bad` if the customer has defaulted on the loan;
+otherwise, returns `good`.
+
+**Type:** String/Boolean
+
 [GermanCreditCroissant.json]: GermanCreditCroissant.json
 [loan's purpose column]: #purpose-of-the-loan
 [credit for consumption hypothesis]: Hypotheses.md
