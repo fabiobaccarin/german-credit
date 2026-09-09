@@ -148,3 +148,4 @@ the model performs across genders.
 [credit for consumption hypothesis]: Hypotheses.md
 [gender irrelevance hypothesis]: Hypotheses.md
 [marital status irrelevance hypothesis]: Hypotheses.md
+[gender and marital status column]: #gender-and-marital-status
