@@ -143,6 +143,20 @@ the model performs across genders.
 
 ## Marital status
 
+**Name:** `marital_status`
+
+**Description:** Derived from [gender and marital status column]. This column
+isolates the marital status from the gender to be able to gauge how the model
+performs across different marital stata.
+
+**Type:** Categorical
+
+**Possible values:**
+* `"div/dep/mar"`
+* `"div/sep"`
+* `"mar/wid"`
+* `"single"`
+
 [GermanCreditCroissant.json]: GermanCreditCroissant.json
 [loan's purpose column]: #purpose-of-the-loan
 [credit for consumption hypothesis]: Hypotheses.md
