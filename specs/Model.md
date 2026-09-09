@@ -174,44 +174,190 @@ CLASS Model:
         OUTPUTS: An object of CLASS Model
         PURPOSE: Class constructor
         SIDE EFFECTS: Allocates memory to hold an object of CLASS Model
-    
-    METHOD _validate_data_contract:
-        INPUTS: Data in tabular form
-        OUTPUTS: An object of CLASS Model
-        PURPOSE: Check input data conforms to the data contract implemented by
-                 the Data IO module
-        SIDE EFFECTS: None
+CLASS ModelInterface
+    """
+    Implements model fitting API
+    """
 
-    METHOD _ensure_valid_predictions:
-        INPUTS: A list of predictions made by an object of CLASS Model
-        OUTPUTS: An object of CLASS Model
-        PURPOSE: Checks that outputted predictions are in the correct format
-        SIDE EFFECTS: None
-    
-    METHOD _fit:
-        INPUTS: Data in tabular form
-        OUTPUTS: An object of CLASS Model
-        PURPOSE: Fits the model according to the evaluation strategy
-        SIDE EFFECTS: Modifies the object of CLASS Model to hold the fitted
-                      algorithm with its metadata and evaluation metrics
+    METHOD __init__
+        INPUTS
+            _validated: an object of validated information to store inside the
+            object
+        OUTPUTS
+            An object of CLASS ModelInterface
+        DESCRIPTION
+            Instantiates an object of the CLASS ModelInterfacee
+        SIDE EFFECTS
+            None
+        PRECONDITIONS
+            _validated.features must not be empty
+            AND _validated.algorithm must be one among a finite set of 
+                possibilities
+            AND _validated.data_interface must not be empty and must be of the 
+                required type
+            AND _validated.evaluation_interface must not be empty and must be
+                of the required type
+            AND _validated.feature_engineering_interface must not be empty and 
+                must be of the required type
+            AND _validated.logger must not be empty and must be of the required 
+                type
+        POSTCONDITIONS
+            self.features exists
+            AND self.algorithm exists as an object implemeting the algorithm
+            AND self.data_interface exists
+            AND self.evaluation_interface exists
+            AND self.feature_engineering_interface exists
+            AND self.logger exists
+            AND self._is_fitted is False
+    END
 
-    METHOD fit:
-        INPUTS: Data in tabular form
-        OUTPUTS: An object of CLASS Model
-        PURPOSE: Wraps the fitting routine around validation rules
-        SIDE EFFECTS: None
+    CLASSMETHOD new
+        INPUTS
+            features: list of strings containing feature names
+            algorithm: a string naming one of a set of finite algorithm options
+            data_interface: an object of CLASS DataInterface
+            evaluation_interface: an object of CLASS EvaluationInterface
+            feature_engineering_interface: an object of
+                CLASS FeatureEngineeringInterface
+        OUTPUTS
+            An object of CLASS ModelInterface
+        DESCRIPTION
+            Class constructor
+        PRECONDITIONS
+            None
+        POSTCONDITIONS
+            features must not be empty
+            AND algorithm must be one among a finite set of possibilities
+            AND data_interface must not be empty and must be of the required
+                type
+            AND evaluation_interface must not be empty and must be of the
+                required type
+            AND logger must not be empty and must be of the required type
+    END
     
-    METHOD _predict:
-        INPUTS: Data in tabular form
-        OUTPUTS: A list of numbers
-        PURPOSE: Use data as input for making predictions
-        SIDE EFFECTS: None
+    METHOD _fit
+        INPUTS
+            data: Data in tabular form
+        OUTPUTS
+            An object of CLASS ModelInterface
+        DESCRIPTION
+            Fits the model according to the evaluation interface
+        SIDE EFFECTS
+            Modifies the object of CLASS ModelInterface to hold the fitted 
+            algorithm with its metadata and evaluation metrics
+        PRECONDITIONS
+            self.algorithm exists
+            AND data obeys the data contract established by the
+                self.data_interface
+        POSTCONDITIONS
+            self.algorithm is fitted
+            AND self.evaluation_interface.metrics is not empty
+    END
 
-    METHOD predict:
-        INPUTS: Data in tabular form
-        OUTPUTS: A list of numbers
-        PURPOSE: Wraps prediction around validation rules
-        SIDE EFFECTS: None
+    METHOD fit
+        INPUTS
+            data: Data in tabular form
+        OUTPUTS
+            An object of CLASS Model
+        DESCRIPTION
+            Wraps the fitting routine around validation rules
+        SIDE EFFECTS
+            None
+        PRECONDITIONS
+            None
+        POSTCONDITIONS
+            self.algorithm exists
+            AND data obeys the data contract established by the
+                self.data_interface
+    END
+    
+    GETTER METHOD get_is_fitted
+        INPUTS
+            None
+        OUTPUTS
+            Boolean: True if self.algorithm is fitted
+        DESCRIPTION
+            Getter method to check whether the model is fitted
+        SIDE EFFECTS
+            None
+        PRECONDITIONS
+            None
+        POSTCONDITIONS
+            None
+    END
+
+    SETTER METHOD set_is_fitted
+        INPUTS
+            flag: a boolean value
+        OUTPUTS
+            An object of CLASS ModelInterface
+        DESCRIPTION
+            Sets the object's attribute self.is_fitted = flag
+        SIDE EFFECTS
+            None
+        PRECONDITIONS
+            None
+        POSTCONDITIONS
+            self._is_fitted is either True or False
+    END
+
+    METHOD _predict
+        INPUTS
+            data: data in tabular form
+        OUTPUTS
+            predictions: a list of raw predictions
+        DESCRIPTION
+            Uses the self.algorithm to make predictions in its native format
+        PRECONDITIONS
+            self.algorithm is fitted
+            AND data obeys the data contract established by the
+                self.data_interface
+        POSTCONDITIONS
+            self._raw_predictions exists and conforms to the raw prediction's
+            contract established by the data_interface
+    END
+
+    METHOD predict
+        INPUTS
+            data: Data in tabular form
+        OUTPUTS
+            raw_predictions: A list of predictions in self.algorithm's native
+            form
+        DESCRIPTION
+            Uses the model's underlying algorithm to make predictions
+        PRECONDITIONS
+            self.algorithm exists
+            AND self.algorithm is fitted
+        POSTCONDITIONS
+            self._raw_predictions exists
+    END
+
+    GETTER METHOD get_predictions
+        INPUTS
+            None
+        OUTPUTS
+            predictions: List of prediction values processed for decision making
+        DESCRIPTION
+            Processes raw predictions into a standardized format for decision
+            making by the bank
+        PRECONDITIONS
+            self._raw_predictions exists
+        POSTCONDITIONS
+            None
+    END
+
+    SETTER METHOD set_predictions
+        INPUTS
+            raw_predictions: List of raw prediction values
+        OUTPUTS
+            An object of CLASS ModelInterface
+        DESCRIPTION
+            Sets the interface's attribute self._raw_predictions
+        PRECONDITIONS
+            raw_predictions exists
+            AND raw_predictions is composed of finite numbers
+    END
+END
 ```
 [expected credit loss]: https://primaconsulting.org/ecl-model-ifrs-9-examples/
 [Assumptions]: #assumptions
