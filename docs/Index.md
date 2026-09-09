@@ -23,5 +23,24 @@ the data.
   file. The `description` gives a text definition of the information the column
   is representing.
 
+## Dataset schema
+
+**File:** [GermanCreditSchema.md]
+
+This file contains a complete description of all columns contained in the
+dataset, along with some auxiliary columns created in the project. The file thus
+serves as a data dictionary for the project and frequent consultation is
+recommended for it.
+
+## Hypotheses
+
+**File:** [Hypotheses.md]
+
+This file lists and briefly describes each hypothesis proposed for the project,
+alongside a marker about whether they were falsified or not and the evidence
+for their falsification.
+
 [GermanCreditCroissant.json]: GermanCreditCroissant.json
 [Croissant's specification page]: https://docs.mlcommons.org/croissant/docs/croissant-spec-1.1.html
+[GermanCreditSchema.md]: GermanCreditSchema.md
+[Hypotheses.md]: Hypotheses.md
