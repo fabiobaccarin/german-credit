@@ -132,6 +132,33 @@ to train the model and the remaining 20% will be used to test its generalization
 capabilities and fairness. We will explore other splittings such as 70/30, 60/40
 and 50/50 to understand how the model behaves.
 
+## Assumptions
+
+We make 2 important assumptions about our problem:
+
+1. **Loans are entirely lost upon default.** By not including the loss given
+   default in our evaluation metrics, we effectively say that we lose everything
+   upon default. This is equivalent to say that the bank does not have an
+   effective credit recovery strategy. It is a strong assumption that heavily
+   penalizes the final ECL estimates, but that will be addressed by scenario
+   analysis. Our focus here is PD modelling to reduce worst-case scenario
+   exposure, so this assumption provides necessary simplification of the
+   problem.
+2. **Customers default without paying anything.** Because we are using the total
+   initial loan amount as exposure for our ECL calculations, we are ignoring all
+   intermediate paymentss a customer makes prior to defaulting. This is also a
+   strong assumption. However, it highlights the credit granting dimension of
+   the problem: by emphasizing the initial loan values, we penalize credit
+   decisions that gave large loans to bad customers from the start, irrespective
+   if they had paid some part of the loans prior to defaulting. This is an
+   approach focused on not letting bad customers enter the portfolio in the
+   first place, instead of having them enter and then figure out a way to
+   recover from their default. We think this is what a credit rating model
+   should do, while the credit policy itself should be responsible to make room
+   for commercial goals. It is much easier to tighten or loosen a credit policy
+   rule than to make a new credit scoring model to play along new commercial
+   strategies.
+
 [expected credit loss]: https://primaconsulting.org/ecl-model-ifrs-9-examples/
 [Assumptions]: #assumptions
 [splitting strategy]: #splitting-strategy
