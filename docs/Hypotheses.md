@@ -48,3 +48,13 @@ The model treats customers equally irrespective of their gender, marital status
 or other demographic groupings.
 
 **Status:** Pending
+
+## Stronger signal comes from yes/no flags
+
+The strongest signal for some variables come from whether the customer has the
+attribute the variable describes, rather than its nature. It is more important
+to know whether the customer has savings than how much savings they have, for
+example. (Knowing the amount of savings is important for calculating the loan
+amount, but no necessarily for calculating the probability of default)
+
+**Status:** Pending
