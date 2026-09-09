@@ -91,6 +91,15 @@ savings account, in Deutsche Marks.
 * `">=1000"`
 * `"no known savings"`
 
+## Has savings
+
+**Name:** `has_savings`
+
+**Description:** Returns `yes` if `saving_status != "no known savings"`;
+otherwise, returns `no`.
+
+**Type:** String/Boolean
+
 ## Years employed
 
 **Name:** `employment`
@@ -105,6 +114,13 @@ savings account, in Deutsche Marks.
 * `"4<=X<7"`
 * `">=7"`
 * `"unemployed"`
+
+## Is employed
+
+**Name:** `is_employed`
+
+**Description:** Returns `yes` if `employment != "unemployed"`; otherwise,
+returns `no`
 
 ## Gender and marital status
 
@@ -172,6 +188,15 @@ in case the customer defaults.
 * `"guarantor"`
 * `"none"`
 
+## Has guarantors
+
+**Name:** `has_garantors`
+
+**Description:** Returns `yes` if `other_parties == "guarantor"`; otherwise,
+returns `no`.
+
+**Type:** String/Boolean
+
 ## Property
 
 **Name:** `property_magnitude`
@@ -187,6 +212,15 @@ be used as collateral for the loan.
 * `"no known property"`
 * `"real estate"`
 
+## Has property
+
+**Name:** `has_property`
+
+**Description:** Returns `yes` if `property_magnitude != "no known property"`;
+otherwise, returns `no`.
+
+**Type:** String/Boolean
+
 ## Customer leverage
 
 **Name:** `other_payment_plans`
@@ -201,6 +235,15 @@ the bank or with stores in general.
 * `"none"`
 * `"stores"`
 
+## Is leveraged
+
+**Name:** `is_leveraged`
+
+**Description:** Returns `yes` if `other_payment_plans != "none"`; otherwise,
+returns `no`.
+
+**Type:** String/Boolean
+
 ## Housing
 
 **Name:** `housing`
@@ -213,6 +256,14 @@ the bank or with stores in general.
 * `"for free"`
 * `"own"`
 * `"rent"`
+
+## Owns house
+
+**Name:** `owns_house`
+
+**Description:** Returns `yes` if `housing == "own"`; otherwise, returns `no`.
+
+**Type:** String/Boolean
 
 ## Job status
 
