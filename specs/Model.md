@@ -159,6 +159,60 @@ We make 2 important assumptions about our problem:
    rule than to make a new credit scoring model to play along new commercial
    strategies.
 
+## Implementation
+
+The model will be implemented as a Python class that knows how to process
+features for the model, fit the model and make predictions with new data. It
+will also generate logs for auditability of its behavior.
+
+### Pseudocode
+
+```
+CLASS Model:
+    METHOD __init__:
+        INPUTS: None
+        OUTPUTS: An object of CLASS Model
+        PURPOSE: Class constructor
+        SIDE EFFECTS: Allocates memory to hold an object of CLASS Model
+    
+    METHOD _validate_data_contract:
+        INPUTS: Data in tabular form
+        OUTPUTS: An object of CLASS Model
+        PURPOSE: Check input data conforms to the data contract implemented by
+                 the Data IO module
+        SIDE EFFECTS: None
+
+    METHOD _ensure_valid_predictions:
+        INPUTS: A list of predictions made by an object of CLASS Model
+        OUTPUTS: An object of CLASS Model
+        PURPOSE: Checks that outputted predictions are in the correct format
+        SIDE EFFECTS: None
+    
+    METHOD _fit:
+        INPUTS: Data in tabular form
+        OUTPUTS: An object of CLASS Model
+        PURPOSE: Fits the model according to the evaluation strategy
+        SIDE EFFECTS: Modifies the object of CLASS Model to hold the fitted
+                      algorithm with its metadata and evaluation metrics
+
+    METHOD fit:
+        INPUTS: Data in tabular form
+        OUTPUTS: An object of CLASS Model
+        PURPOSE: Wraps the fitting routine around validation rules
+        SIDE EFFECTS: None
+    
+    METHOD _predict:
+        INPUTS: Data in tabular form
+        OUTPUTS: A list of numbers
+        PURPOSE: Use data as input for making predictions
+        SIDE EFFECTS: None
+
+    METHOD predict:
+        INPUTS: Data in tabular form
+        OUTPUTS: A list of numbers
+        PURPOSE: Wraps prediction around validation rules
+        SIDE EFFECTS: None
+```
 [expected credit loss]: https://primaconsulting.org/ecl-model-ifrs-9-examples/
 [Assumptions]: #assumptions
 [splitting strategy]: #splitting-strategy
