@@ -5,6 +5,23 @@ dataset. All information is extracted from the [GermanCreditCroissant.json]
 file, but organized in a way to facilitate consultation by humans and
 complemented with outside information when needed.
 
+## Summary
+
+The dataset contains 20 features, mostly either low-cardinality numeric features
+or categorical features. The only high-cardinality features are [age] (53
+distinct values), [credit_amount] (921 distinct values) and [duration] (33
+distinct values).
+
+These 20 features are complemented by 9 features created from them. All of these
+are flags (yes/no features) that are intended to check the existence of
+predictive signal in features. For example, they enable us to understand whether
+knowing that the customer has savings is more important than the amount of
+savings for probability of default estimation.
+
+The target column is called `class`. Its possible values are either `good` or
+`bad`, depending on whether the customer has defaulted on the loan. If the
+customer has defaulted, they are flagged as `bad`.
+
 ## Checking status
 
 **Name:** checking_status
@@ -380,3 +397,6 @@ distinct values.
 [gender irrelevance hypothesis]: Hypotheses.md
 [marital status irrelevance hypothesis]: Hypotheses.md
 [gender and marital status column]: #gender-and-marital-status
+[age]: #age
+[credit_amount]: #loan-amount
+[duration]: #duration
