@@ -309,6 +309,71 @@ otherwise, returns `good`.
 
 **Type:** String/Boolean
 
+## Duration
+
+**Name:** `duration`
+
+**Description:** How many months the customer as to pay back the loan.
+
+**Type:** Numeric
+
+## Loan amount
+
+**Name:** `loan_amount`
+
+**Description:** The monetary amount approved by the bank for that customer, in
+Deutsche Marks. This column will be used to weight samples for training, not as
+a predictive feature.
+
+**Type:** Numeric
+
+## Installment commitment
+
+**Name:** `installment_commitment`
+
+**Description:** How much the installment's value consumes of the customer's
+income. It has only 4 distinct values.
+
+**Type:** Numeric
+
+## Residence time
+
+**Name:** `residence_since`
+
+**Description:** The number of years the customer resides in Germany. It has
+only 4 distinct values.
+
+**Type:** Numeric
+
+## Age
+
+**Name:** `age`
+
+**Description:** The customer's age in years. This column is also illegal to
+use without proper presentation of compelling evidence of its relevance and thus
+will be used only to assess the model's fairness amongst different demographic
+groups. See also [gender and marital status column].
+
+**Type:** Numeric
+
+## Existing credits
+
+**Name:** `existing_credits`
+
+**Description:** The total amount of other existing credits the customer has,
+in Deutsche Marks. It has only 4 distinct values.
+
+**Type:** Numeric
+
+## Number of dependents
+
+**Name:** `num_dependents`
+
+**Description:** The number of dependents the customer has. It has only 2
+distinct values.
+
+**Type:** Numeric
+
 [GermanCreditCroissant.json]: GermanCreditCroissant.json
 [loan's purpose column]: #purpose-of-the-loan
 [credit for consumption hypothesis]: Hypotheses.md
