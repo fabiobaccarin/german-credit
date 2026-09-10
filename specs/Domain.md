@@ -28,17 +28,13 @@ An alias for a Polars Dataframe.
 An union type for `LogisticRegression`, `LinearSVC`, `RandomForestClassifier`, 
 `DecisionTreeClassifier` and `XGBClassifier`.
 
-## `NonNegativeFloat`
-
-A float that is never smaller than 0.
-
 ## `FeatureList`
 
 A non-empty list of [FeatureName] values.
 
 ## `FeatureImportance`
 
-An alias for [NonNegativeFloat].
+An alias for Pydantic's `NonNegativeFloat`.
 
 ## `FeatureImportanceMapping`
 
@@ -110,7 +106,6 @@ A [ModelScoreMapping] value mapping each [Metric] value to a [ModelScore] value.
 [Pipeline]: #pipeline
 [features]: #features
 [FeatureImportance]: #featureimportance
-[NonNegativeFloat]: #nonnegativefloat
 [FeatureImportances]: #featureimportances
 [FeatureName]: #featurename
 [FeatureImportanceMapping]: #featureimportancemapping
