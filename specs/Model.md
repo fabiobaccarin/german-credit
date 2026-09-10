@@ -251,8 +251,190 @@ will also generate logs for auditability of its behavior.
 ```
 CLASS EvaluationInterface
     """
-    Implements model evaluation API
+    Implements model evaluation API. Its responsibility is to score and explain
+    the model.
     """
+
+    METHOD __init__
+        INPUTS
+            _validated: an object of validated information to store inside the
+            object
+        OUTPUTS
+            An object of CLASS EvaluationInterface
+        DESCRIPTION
+            Instantiates an object of CLASS EvaluationInterface
+        SIDE EFFECTS
+            Logs object creation
+        PRECONDITIONS
+            _validated.features must not be empty and must be of required type
+            AND _validated.permutations must not be empty and must of required
+                type
+        POSTCONDITIONS
+            self.features exists
+            self.permutations exists
+    END
+
+    CLASS METHOD new
+        INPUTS
+            features: list of strings representing feature names
+            permutations: number of permutations to perform for each feature
+        OUTPUTS
+            An object of CLASS EvaluationInterface
+        SIDE EFFECTS
+            None
+        PRECONDITIONS
+            None
+        POSTCONDITIONS
+            features must not be empty and must be of required type
+            AND permutations must not be empty and must of required type
+    END
+
+    GETTER METHOD importances
+        INPUTS
+            None
+        OUTPUTS
+            values: a list of importance estimates for each feature in
+                self.features
+        DESCRIPTION
+            Calculates feature importances
+        SIDE EFFECTS
+            Logs feature importances
+        PRECONDITIONS
+            self.features exists
+            AND self.permutations exists
+        POSTCONDITIONS
+            Every value in values is a non-finite number and every feature in
+            self.features has an associated value
+    END
+
+    STATIC METHOD _check_pd
+        INPUTS
+            pd: customer's estimated PD
+        OUTPUTS
+            None
+        DESCRIPTION
+            Implements preconditions for PD usage in calculations
+        SIDE EFFECTS
+            Halts program execution upon failure and logs error
+        PRECONDITIONS
+            None
+        POSTCONDITIONS
+            pd is in the interval (0, 1)
+    END
+
+    STATIC METHOD _check_loan_amount
+        INPUTS
+            loan_amount: customer's loan amount in Deutsche Marks
+        OUTPUTS
+            None
+        DESCRIPTION
+            Implements preconditions for loan amount usage in calculations
+        SIDE EFFECTS
+            Halts program execution upon failure and logs error
+        PRECONDITIONS
+            None
+        POSTCONDITIONS
+            loan_amount is a non-negative real number
+    END
+    
+    METHOD _check_customer_cost_inputs
+        INPUTS
+            probability_default: customer's estimated PD
+            AND loan_amount: customer's approved loan amount
+        OUTPUTS
+            None
+        DESCRIPTION
+            Checks preconditions for calculating the customer's cost
+        SIDE EFFECTS
+            None
+        PRECONDITIONS
+            None
+        POSTCONDITIONS
+            probability_default is in the (0, 1) interval
+            AND loan_amount is a non-negative real number
+    END
+
+    METHOD _generalized_loss_function
+        INPUTS
+            pd: PD estimate
+            AND loan_amount: customer's approved loan amount
+            AND calculate_brier: flag to indicate whether the Brier score should
+                be calculated
+        OUTPUTS
+            results: a list of non-negative real numbers
+        DESCRIPTION
+            Calculates the loss or cost functions
+        SIDE EFFECTS
+            None
+        PRECONDITIONS
+            probability_default is in the (0, 1) interval
+            AND loan_amount is a non-negative real number
+            AND calculate_brier must be either True or False
+        POSTCONDITIONS
+            results is a list of non-negative real numbers
+    END
+
+    METHOD _calculate_customer_cost
+        INPUTS
+            probability_default: customer's estimated PD
+            AND loan_amount: customer's approved loan amount
+        OUTPUTS
+            None
+        DESCRIPTION
+            Calculates the customer's cost
+        SIDE EFFECTS
+            Creates self.customer_costs
+        PRECONDITIONS
+            probability_default is in the (0, 1) interval
+            AND loan_amount is a non-negative real number
+        POSTCONDITIONS
+            self.customer_costs is a list of non-negative real numbers
+    END
+
+    GETTER METHOD average_customer_cost
+        INPUTS
+            None
+        OUTPUTS
+            result: average estimated cost per customer
+        DESCRIPTION
+            Calculates the average cost per customer
+        SIDE EFFECTS
+            None
+        PRECONDITIONS
+            self.customer_costs exists
+        POSTCONDITIONS
+            result is a non-negative real number
+    END
+
+    METHOD _calculate_customer_loss
+        INPUTS
+            probability_default: customer's estimated PD
+            AND loan_amount: customer's approved loan amount
+        OUTPUTS
+            None
+        DESCRIPTION
+            Calculates customer losses
+        SIDE EFFECTS
+            Creates self.customer_losses
+        PRECONDITIONS
+            probability_default is in the (0, 1) interval
+            AND loan_amount is a non-negative real number
+        POSTCONDITIONS
+            self.customer_losses is a list of non-negative real numbers
+    END
+
+    GETTER METHOD average_customer_loss
+        INPUTS
+            None
+        OUTPUTS
+            result: average estimated loss per customer
+        DESCRIPTION
+            Calculates the average loss per customer
+        PRECONDITIONS
+            self.customer_losses exists
+        POSTCONDITIONS
+            result is a non-negative real number
+    END
 END
 
 CLASS FeatureEngineeringInterface
@@ -347,12 +529,6 @@ CLASS ModelInterface
             _validated.features must not be empty
             AND _validated.algorithm must be one among a finite set of 
                 possibilities
-            AND _validated.data_interface must not be empty and must be of the 
-                required type
-            AND _validated.evaluation_interface must not be empty and must be
-                of the required type
-            AND _validated.feature_engineering_interface must not be empty and 
-                must be of the required type
             AND _validated.logger must not be empty and must be of the required 
                 type
         POSTCONDITIONS
@@ -513,6 +689,9 @@ CLASS ModelInterface
     END
 END
 ```
+
+### Data types
+
 [expected credit loss]: https://primaconsulting.org/ecl-model-ifrs-9-examples/
 [Assumptions]: #assumptions
 [splitting strategy]: #splitting-strategy
