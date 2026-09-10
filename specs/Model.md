@@ -13,10 +13,15 @@ The other two are specifically designed to optimize model training by ensuring
 the embedded mathematical optimization problem is convex. These metrics are the
 total and the average loss of the model. They replace the probability of default
 estimate by a proper scoring rule and process the loan amounts to reduce outlier
-influence and improving the smoothness of the loss function topology.
+influence and improving the smoothness of the loss function topology. Model
+inspection will be implemented through permutation importance estimates for the
+average customer cost to keep model inspection robust, easy to explain and
+insighful for the business problem.
 
-The model will be evaluated using a simplified version of IFRS 9's
-[expected credit loss] (ECL) framework. In particular, we define the model's
+### Metrics
+
+The model will be evaluated using a simplified version of IFRS 9's ECL
+([expected credit loss]) framework. In particular, we define the model's
 cost function as follows:
 
 $$
@@ -61,7 +66,7 @@ $L$ for training, and will report it alongside the total and average costs for
 model evaluation.
 
 This loss function will achieve convexity in 2 ways. First, it will replace the
-probability of default (PD) estimate by a proper scoring rule associated with
+PD (probability of default) estimate by a proper scoring rule associated with
 calibrated probabilities. Second, it will stabilize the loan amount values that
 serve as weights in such a way to reduce the influence of extreme values in
 the training.
@@ -73,7 +78,7 @@ because the dataset has only 1_000 rows in total, which might make a
 log-loss-based loss function particularly susceptible to overfitting because
 the log-loss heavily penalizes tail risks. While it would be useful to penalize
 tail risks in model training, we think this can be better accomplished by
-running stress tests with [value-at-risk] (VaR) estimates. This will make the
+running stress tests with VaR ([value-at-risk]) estimates. This will make the
 risks much more transparent compared to embedding it into the model training.
 
 Second, the Brier score is a quadractic function of the PD, which is
@@ -124,6 +129,13 @@ $$
 $$
 \lambda = \frac{L^{*}}{N}
 $$
+
+### Model inspection
+
+Regarding model inspection, we will implement [permutation importance] estimates
+based on bootstrapping the average cost per customer. This will ensure that
+every model we make is inspectionable in a way that is meaningful both to
+data scientists and business professionals.
 
 ## Splitting strategy
 
@@ -510,3 +522,4 @@ END
 [RMSE]: https://en.wikipedia.org/wiki/Root_mean_square_deviation
 [¹]: https://www.emergentmind.com/topics/categorical-machine-learning-methods
 [Feature engineering]: #feature-engineering
+[permutation importance]: https://scikit-learn.org/stable/modules/permutation_importance.html
