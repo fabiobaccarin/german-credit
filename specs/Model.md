@@ -132,6 +132,53 @@ to train the model and the remaining 20% will be used to test its generalization
 capabilities and fairness. We will explore other splittings such as 70/30, 60/40
 and 50/50 to understand how the model behaves.
 
+## Feature engineering
+
+The major concern for feature engineering is the dataset size. Given that we
+only have at most 800 lines of data to train our model, it is paramount to keep
+the dimensionality of the feature space as small as possible. To do that, we
+considered 2 alternatives: smoothed target encoding and GLMM (generalized linear 
+mixed model) encoding[¹].
+
+Smoothed target encoding and GLMM encoding are fundamentally the same thing. The
+difference lies in that GLMM is a more statistically principled way to
+implement regularized target encoding. Instead of blending local and global
+average as in smoothed target encoding, GLMM encoding estimates a random
+effects model. This has the advantage of enabling sharing of information between
+rows, thus being much more robust to overfitting. GLMMs assume all observations
+come from the same underlying (Gaussian) distribution with 0 mean and an unknown
+variance. The GLMM's job is simply to estimate this variance to estimate the
+random effects.
+
+The GLMM model works similarly to a dummy model, but with important differences.
+Random effects are like dummies on steroids: instead of estimating statical
+local coefficients (which are fixed effects), random effects estimate an entire
+distribution to understand subpopulation behavior. Random effects can be
+understood as a regularized version of dummy variables, where regularization
+is implemented hierarchically through variance shrinkage towards 0 mean.
+
+In practice, this means we get an output very similar to smoothed target
+encoding, but within a more robust regularization framework than simple average
+blending. For small datasets (as is our case), this is ideal. For large
+datasets, GLMMs are computationally expensive. Also, we have enough data to make 
+simple average blending effective in controlling overfitting, so smoothed target
+encoding is more appropriate.
+
+At the end of feature engineering, every categorical feature will be encoded as
+a single numeric column. Then, we will standardize all features to have 0 mean
+and unit variance. We don't have missing data in our dataset, but we will train
+simple imputers anyway to make the model robust in production. The fact that we
+don't have missing data in our dataset does not guarantee we won't have missing
+data in production, so it is good to be prepared for this scenario.
+
+This will, however, make the model fail silently in production. We understand
+that this is a feature, not a bug. The model's job is to make reliable
+predictions of credit risk, not monitor data quality. Missing values prevalence
+must be monitored separately inside data quality monitoring processes.
+Decoupling these things (data quality and model prediction) imply that not all
+missing data represent a problem: if we have 1% of missing data, that is not
+likely an issue.
+
 ## Assumptions
 
 We make 2 important assumptions about our problem:
