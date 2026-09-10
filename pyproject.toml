@@ -29,19 +29,3 @@ dev = [
     "ruff>=0.16.6",
     "seaborn>=0.13.2",
 ]
-
-[tool.ruff]
-src = ["src"]
-target-version = "py314"
-select = ["E", "W", "F", "I", "B"]
-line-length = 80
-fix = true
-exclude = [
-    ".git",
-    ".venv",
-    "build",
-    "dist",
-]
-
-[tool.ruff.format]
-line-length = 80
