@@ -10,6 +10,12 @@ relevant specification files and providing links to them.
 Defines the service responsible for reading, loading and validating data
 (including what is sent to and delivered by other services)
 
+## Domain
+
+**File:** [Domain.md]
+
+Defines the domain models for the project.
+
 ## Evaluation service
 
 **File:** [Evaluation.md]
@@ -41,6 +47,13 @@ persistent manner across the project's services.
 Defines the credit score model service that is responsible for fitting and
 prediction.
 
+## Navigation service
+
+**File:** [Navigation.md]
+
+Defines the service that is responsible for providing navigation paths across
+the project to other services.
+
 ## Tracking service
 
 **File:** [Tracking.md]
@@ -52,10 +65,12 @@ Defines the tracking service responsible for registering experiments in MLFlow.
 [Modelling methodology]
 
 [Data.md]: Data.md
+[Domain.md]: Domain.md
 [Evaluation.md]: Evaluation.md
 [FeatureEngineering.md]: FeatureEngineering.md
 [Logger.md]: Logger.md
 [Model.md]: Model.md
+[Navigation.md]: Navigation.md
 [Tracking.md]: Tracking.md
 [model service]: #model-service
 [Modelling methodology]: ../docs/Methodology.md
