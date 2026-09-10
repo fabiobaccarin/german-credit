@@ -168,12 +168,18 @@ will also generate logs for auditability of its behavior.
 ### Pseudocode
 
 ```
-CLASS Model:
-    METHOD __init__:
-        INPUTS: None
-        OUTPUTS: An object of CLASS Model
-        PURPOSE: Class constructor
-        SIDE EFFECTS: Allocates memory to hold an object of CLASS Model
+CLASS EvaluationInterface
+    """
+    Implements model evaluation API
+    """
+END
+
+CLASS FeatureEngineeringInterface
+    """
+    Implements the feature engineering API
+    """
+END
+
 CLASS ModelInterface
     """
     Implements model fitting API
