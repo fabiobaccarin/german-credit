@@ -1,6 +1,6 @@
-# Evaluation interface specification
+# Evaluation service specification
 
-This file describes the evaluation interface specification for the project. For
+This file describes the evaluation service specification for the project. For
 brevity, the `__init__` method is omitted. If entries like **Inputs**,
 **Preconditions** or **Postconditions** are omitted, it is assumed that they 
 aren't applicable to the method. Only the public API is specified.
@@ -13,7 +13,7 @@ method for retrieving the average metrics per customer.
 
 ## Signature
 
-**Name:** `EvaluationInterface` \
+**Name:** `EvaluationService` \
 **Description:** Implements the evaluation strategy for the project
 
 ## Attributes
@@ -47,7 +47,7 @@ losses
 **Type:** `classmethod` \
 **Description:** Class constructor that validates inputs \
 **Inputs:** [features]; [permutations] \
-**Outputs:** An object of class `EvaluationInterface`
+**Outputs:** An object of class `EvaluationService`
 
 **Postconditions:**
 - `features` is not empty and is of required type
