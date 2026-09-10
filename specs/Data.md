@@ -1,91 +1,114 @@
-CLASS ModelValidator
-    """
-    Provides data validation methods for ensuring correct model execution
-    """
-    
-    METHOD __init__
-        INPUTS
-            input_schema: an object containing field restrictions for inputs
-            AND output_schema: an object containing field restrictions for
-                outputs
-        OUTPUTS
-            None
-        DESCRIPTION
-            Initializes an object of CLASS ModelValidator
-        SIDE EFFECTS
-            None
-        PRECONDITIONS
-            input_schema must not be empty and must be of required type
-            AND output_schema must not be empty and must be of required type
-        POSTCONDITIONS
-            self.input_schema exists
-            AND self.output_schema exists
-        INVARIANTS
-            input_schema doesn't no change during method execution
-            AND output_schema doesn't no change during method execution
-    END
+# Data service specification
 
-    METHOD validate_input
-        INPUTS
-            data: Data in tabular form
-        OUTPUTS
-            None
-        DESCRIPTION
-            Check input data conforms to the data contract implemented by the
-            Data IO module
-        SIDE EFFECTS
-            None
-        PRECONDITIONS
-            data is not empty and is of correct type
-        POSTCONDITIONS
-            data conforms to the contract specified by self.input_schema
-    END
+This file describes the project's data service public API.
 
-    METHOD validate_output
-        INPUTS
-            data: Data in tabular form
-        OUTPUTS
-            None
-        DESCRIPTION
-            Check output data conforms to the data contract implemented by
-            the DATA IO module
-        SIDE EFFECTS
-            None
-        PRECONDITIONS
-            data is not empty and is of correct type
-        POSTCONDITIONS
-            data conforms to the contract specified by self.output_schema
-    END
-END
+**Summary:** The data service is implemented as a Python class responsible for
+reading, writing and validating data.
 
-FUNCTION new_model_validator
-    INPUTS
-        input_schema: an object containing field restrictions for inputs
-        AND output_schema: an object containing field restrictions for outputs
-    OUTPUTS
-        An object of CLASS ModelValidator
-    PRECONDITIONS
-        None
-    POSTCONDITIONS
-        input_schema is not empty and is of required type
-        AND output_schema is not empty and is of required type
-END
+## Signature
 
-METHOD validate_predictions
-        INPUTS
-            predictions: A list of predictions made by an object of CLASS 
-                ModelInterface
-        OUTPUTS
-            predictions
-        DESCRIPTION
-            Checks that outputted predictions are in the correct format
-        SIDE EFFECTS
-            None
-        PRECONDITIONS
-            None
-        POSTCONDITIONS
-            preditions is not an empty list
-            AND All predictions are allowed string values
-        INVARIANTS
-            predictions must not change during the method's execution
-    END
+**Name:** `DataService` \
+**Description:** Implements data reading, writing and validation
+
+## Attributes
+
+### `content`
+
+**Type:** `DatasetContent` \
+**Description:** Container storing the dataset's URL, its destination file and
+its checksum
+
+### `model_schema`
+
+**Type:** `ModelSchema` \
+**Description:** Container storing the data contract regarding the model's
+inputs
+
+### `prediction_schema`
+
+**Type:** `PredictionSchema` \
+**Description:** Container storing the data contract regarding the model's
+predictions
+
+## Methods
+
+### `new`
+
+**Type:** `classmethod` \
+**Description:** Class constructor that validates inputs \
+**Inputs:** [content]; [model_schema]; [prediction_schema] \
+**Outputs:** An object of class `DataService`
+
+### `fetch`
+
+**Type:** `method` \
+**Description:** Retrieves data based on its [content]'s URL \
+**Outputs:** A `Dataset` object with the data and metadata
+
+**Preconditions:**
+- The [content]'s URL exists and accepts HTTP GET requests
+- The [content]'s checksum is a valid checksum string
+
+**Postconditions:**
+- The `Dataset` returned is not empty and has file integrity
+
+### `save`
+
+**Type:** `method` \
+**Description:** Write a `Dataset`'s content to disk as a Parquet file \
+
+**Inputs:**
+- A `FilePath` object containing the address on disk to write
+- A `Dataset` to write to disk
+
+**Preconditions:**
+- The `FilePath` must exist in disk and must be writable
+- The `Dataset` must not be empty
+
+**Postconditions:**
+- A Parquet file exists on disk in the specified location
+
+### `load`
+
+**Type:** `method` \
+**Description:** Loads a Parquet file from disk into a `Dataset` \
+**Inputs:** A `FilePath` address to the file \
+**Outputs:** A `Dataset` based on the `FilePath` provided \
+**Preconditions:** The `FilePath` must exist on disk and be readable \
+**Postconditions:** The `Dataset` is not empty
+
+### `load_model`
+
+**Type:** `method` \
+**Description:** Loads a `Model` from disk \
+**Inputs:** A `FilePath` address to the file in which the model is stored \
+**Outputs:** A `Model` with all its attributes \
+**Preconditions:** The `FilePath` must exist on disk and be readable \
+**Postconditions:** The loaded `Model` must have all its attributes
+
+### `dump`
+
+**Type:** `method` \
+**Description:** Writes a `Model` to disk as a pickle file
+
+**Inputs:**
+- A `FilePath` address to the file to write
+- A `Model` to write to disk
+
+**Preconditions:**
+- The provided `FilePath` must be writable and exist on disk
+- The provided `Model` must be fitted
+
+**Postconditions:** There exists a file at `FilePath` containing the `Model`'s 
+data and its attributes
+
+## See also
+
+[Domain] \
+[Modelling methodology]
+
+[Domain]: Domain.md
+[Modelling methodology]: ../docs/Methodology.md
+[content]: #content
+[model_schema]: #model_schema
+[prediction_schema]: #prediction_schema
