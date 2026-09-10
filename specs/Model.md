@@ -181,7 +181,7 @@ likely an issue.
 
 ## Assumptions
 
-We make 2 important assumptions about our problem:
+We make 4 important assumptions about our problem:
 
 1. **Loans are entirely lost upon default.** By not including the loss given
    default in our evaluation metrics, we effectively say that we lose everything
@@ -205,6 +205,28 @@ We make 2 important assumptions about our problem:
    for commercial goals. It is much easier to tighten or loosen a credit policy
    rule than to make a new credit scoring model to play along new commercial
    strategies.
+3. **Categorical effects come from the same distribution.** This is the main
+   assumption we make to implement our [Feature engineering] strategy. This
+   assumption is not necessarily unrealistic: customers with different kinds of
+   jobs or checking account stata may come from the same underlying risk
+   distributions. There is no reason to believe the risk distribution for
+   customers with less than 1 year at a job is fundamentally different from the
+   risk distribution for customers with more than 7 years at a job. It seems
+   quite reasonable to assume that both kinds of customers come from the same
+   distribution, but from different places inside it. Even if this weren't true,
+   we wouldn't have enough data to estimate a different distribution for all
+   subgroups in the data. So we don't have a choice but to make some simplifying
+   distributional assumption. This seems the least restrictive of our options.
+4. **Single responsibility principle.** There are 2 main components to our
+   project: data and modelling. We assume each component must work independently
+   of the other and do only 1 thing realy well. This implies that our model's
+   responsibility is to make reliable predictions, not to ensure its inputs are
+   correct. Similarly, our data interface's job is to ensure the model's input
+   are correct, not to make reliable predictions based on them. In practice,
+   this means our model will have imputers in place to handle missing data even
+   if we don't have any missing data in our dataset. The model won't halt
+   execution upon receiving missing data. To monitor missing data is our data
+   interface's job.
 
 ## Implementation
 
