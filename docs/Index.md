@@ -52,3 +52,4 @@ principles that drive code specifications.
 [Croissant's specification page]: https://docs.mlcommons.org/croissant/docs/croissant-spec-1.1.html
 [GermanCreditSchema.md]: GermanCreditSchema.md
 [Hypotheses.md]: Hypotheses.md
+[Methodology.md]: Methodology.md
