@@ -441,3 +441,5 @@ END
 [Brier score]: https://en.wikipedia.org/wiki/Brier_score
 [value-at-risk]: https://en.wikipedia.org/wiki/Value_at_risk
 [RMSE]: https://en.wikipedia.org/wiki/Root_mean_square_deviation
+[¹]: https://www.emergentmind.com/topics/categorical-machine-learning-methods
+[Feature engineering]: #feature-engineering
