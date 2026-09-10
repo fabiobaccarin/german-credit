@@ -110,14 +110,14 @@ risk costs that the natural logarithm brings to the modelling.
 Therefore, our loss function $L$ can be defined as follows:
 
 $$
-L = {\left( p - \hat{y} \right)}^{2} \times \sqrt{LA}
+L = {\left( \hat{y} - p \right)}^{2} \times \sqrt{LA}
 $$
 
 With its total and average values $L^{*}$ and $\lambda$ defined as:
 
 $$
 L^{*} = \sum_{i = 1}^{N}{
-    \left[ {\left( p - \hat{y} \right)}^{2} \times \sqrt{LA} \right]
+    \left[ {\left( \hat{y} - p \right)}^{2} \times \sqrt{LA} \right]
 }
 $$
 
