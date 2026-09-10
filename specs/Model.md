@@ -245,13 +245,80 @@ END
 
 CLASS FeatureEngineeringInterface
     """
-    Implements the feature engineering API
+    Implements the feature engineering API. Its responsibility is to process
+    data for the model.
     """
+
+    METHOD __init__
+        INPUTS
+            _validated: an object of validated information to store inside the
+            object
+        OUTPUTS
+            An object of CLASS FeatureEngineeringInterface
+        DESCRIPTION
+            Instantiates an object of the CLASS FeatureEngineeringInterface
+        SIDE EFFECTS
+            None
+        PRECONDITIONS
+            _validated.features must not be empty
+        POSTCONDITIONS
+            self.features exists and is a combination of features and
+                features_to_create
+            AND self.features_to_create exists and is of required type
+    END
+
+    CLASS METHOD new
+        INPUTS
+            features: a list of strings representing features to process
+            AND features_to_create: a mapping of strings to booleans to flag
+                which features must be created
+        OUTPUTS
+            An object of CLASS FeatureEngineeringInterface
+        DESCRIPTION
+            Class constructor
+        PRECONDITIONS
+            None
+        POSTCONDITIONS
+            features is not empty and is of required type
+            AND features_to_create is either empty or has implemented methods
+                for creation
+    END
+
+    TEMPLATE METHOD _make_feature_foo
+        INPUTS
+            None
+        OUTPUTS
+            feature: a list of values for a feature
+        DESCRIPTION
+            Describes a template for creating an arbitrary feature FOO. If FOO
+            is not in self.features_to_create, then _make_feature_foo is
+            skipped. Each feature in self.features_to_create.keys() must have
+            a method implemented by this template with name _make_feature_<key>
+        PRECONDITIONS
+            self.features_to_create exists and is of required type
+        POSTCONDITIONS
+            feature exists and is of required type
+    END
+
+    GETTER METHOD pipeline
+        INPUTS
+            None
+        OUTPUTS
+            p: A Pipeline object that implements the feature engineering
+                strategy
+        DESCRIPTION
+            Instantiates a feature engineering pipeline
+        PRECONDITIONS
+            self.features exists
+        POSTCONDITIONS
+            p exists
+    END
 END
 
 CLASS ModelInterface
     """
-    Implements model fitting API
+    Implements model fitting API. Its responsibility is to fit the model and
+    use it for making reliable predictions.
     """
 
     METHOD __init__
@@ -261,7 +328,7 @@ CLASS ModelInterface
         OUTPUTS
             An object of CLASS ModelInterface
         DESCRIPTION
-            Instantiates an object of the CLASS ModelInterfacee
+            Instantiates an object of the CLASS ModelInterface
         SIDE EFFECTS
             None
         PRECONDITIONS
@@ -286,7 +353,7 @@ CLASS ModelInterface
             AND self._is_fitted is False
     END
 
-    CLASSMETHOD new
+    CLASS METHOD new
         INPUTS
             features: list of strings containing feature names
             algorithm: a string naming one of a set of finite algorithm options
@@ -346,7 +413,7 @@ CLASS ModelInterface
                 self.data_interface
     END
     
-    GETTER METHOD get_is_fitted
+    GETTER METHOD is_fitted
         INPUTS
             None
         OUTPUTS
@@ -388,8 +455,7 @@ CLASS ModelInterface
             AND data obeys the data contract established by the
                 self.data_interface
         POSTCONDITIONS
-            self._raw_predictions exists and conforms to the raw prediction's
-            contract established by the data_interface
+            self._raw_predictions exists
     END
 
     METHOD predict
@@ -404,10 +470,11 @@ CLASS ModelInterface
             self.algorithm exists
             AND self.algorithm is fitted
         POSTCONDITIONS
-            self._raw_predictions exists
+            self._raw_predictions conforms to the raw prediction's contract 
+            established by the self.data_interface
     END
 
-    GETTER METHOD get_predictions
+    GETTER METHOD predictions
         INPUTS
             None
         OUTPUTS
