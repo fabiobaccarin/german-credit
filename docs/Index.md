@@ -40,6 +40,14 @@ This file lists and briefly describes each hypothesis proposed for the project,
 alongside a marker about whether they were falsified or not and the evidence
 for their falsification.
 
+## Methodology
+
+**File:** [Methodology.md]
+
+Defines the modelling methodology adopted for developing the credit score model.
+This is the authority file for statistical techniques, assumptions and design
+principles that drive code specifications.
+
 [GermanCreditCroissant.json]: GermanCreditCroissant.json
 [Croissant's specification page]: https://docs.mlcommons.org/croissant/docs/croissant-spec-1.1.html
 [GermanCreditSchema.md]: GermanCreditSchema.md
