@@ -35,6 +35,21 @@ wheels = [
 ]
 
 [[package]]
+name = "category-encoders"
+version = "2.11.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "numpy" },
+    { name = "pandas" },
+    { name = "scikit-learn" },
+    { name = "scipy" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/6d/28/3325463e27238bacefce34902ce2e5883ea3bd4044ce93e744ef499a6d72/category_encoders-2.11.1.tar.gz", hash = "sha256:f21b99185800c19b562b2928a0fe67dbf5658d048cd70451bfe8811c4123fdb0", size = 76600, upload-time = "2026-09-08T15:29:09.823Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/2a/e3/d67cd83d61549823d3c0f11c3b57e9057e377441714ca2990105a640ce56/category_encoders-2.11.1-py3-none-any.whl", hash = "sha256:bba59a25bcee5b11380ea1fda2690b427bdd06e2ed36a17cab55fdd3b70bda16", size = 107914, upload-time = "2026-09-08T15:29:08.398Z" },
+]
+
+[[package]]
 name = "cffi"
 version = "2.1.1"
 source = { registry = "https://pypi.org/simple" }
@@ -230,6 +245,7 @@ name = "german-credit"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
+    { name = "category-encoders" },
     { name = "numpy" },
     { name = "pandas" },
     { name = "polars" },
@@ -248,6 +264,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "category-encoders", specifier = ">=2.11.1" },
     { name = "numpy", specifier = ">=2.5.3" },
     { name = "pandas", specifier = ">=3.0.5" },
     { name = "polars", specifier = ">=1.44.1" },
