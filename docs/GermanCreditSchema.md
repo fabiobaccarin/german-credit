@@ -24,13 +24,10 @@ customer has defaulted, they are flagged as `bad`.
 
 ## Checking status
 
-**Name:** checking_status
-
+**Name:** `checking_status` \
 **Description:** Each value describes the state of the customer's checking
-account at the time of measurement.
-
-**Type:** Categorical
-
+account at the time of measurement. \
+**Type:** Categorical \
 **Possible values:** The numbers represent values in Deutsche Marks
 * `"<0"`
 * `"0<=X<=200"`
@@ -39,13 +36,10 @@ account at the time of measurement.
 
 ## Credit history
 
-**Name:** `credit_history`
-
+**Name:** `credit_history` \
 **Description:** Each value describes the customer's credit history
-qualitatively.
-
-**Type:** Categorical
-
+qualitatively. \
+**Type:** Categorical \
 **Possible values:**
 * `"all paid"`: indicates a customer that has paid all loans with the bank
 * `"critical/other existing credit"`: indicates critical accounts holding debts
@@ -56,12 +50,9 @@ qualitatively.
 
 ## Purpose of the loan
 
-**Name:** `purpose`
-
-**Description:** What the customer will do with the loan
-
-**Type:** Categorical
-
+**Name:** `purpose` \
+**Description:** What the customer will do with the loan \
+**Type:** Categorical \
 **Possible values**:
 * `"business"`
 * `"domestic appliance"`
@@ -77,8 +68,7 @@ qualitatively.
 
 ## Credit for consumption
 
-**Name:** `is_credit_for_consumption`
-
+**Name:** `is_credit_for_consumption` \
 **Description:** Derived from the [loan's purpose column], this column has the
 value `yes` if the loan's purpose is one of these values:
 * `"domestic appliance"`
@@ -88,19 +78,15 @@ value `yes` if the loan's purpose is one of these values:
 * `"used car"`
 * `"vacation"`
 
-Otherwise, the value is `no`. See the [credit for consumption hypothesis].
-
+Otherwise, the value is `no`. See the [credit for consumption hypothesis]. \
 **Type:** String/Boolean
 
 ## Saving status
 
-**Name:** `saving_status`
-
+**Name:** `saving_status` \
 **Description:** Each value describes the amount a customer has in their
-savings account, in Deutsche Marks.
-
-**Type:** Categorical
-
+savings account, in Deutsche Marks. \
+**Type:** Categorical \
 **Possible values**:
 * `"<100"`
 * `"100<=X<500"`
@@ -110,21 +96,16 @@ savings account, in Deutsche Marks.
 
 ## Has savings
 
-**Name:** `has_savings`
-
+**Name:** `has_savings` \
 **Description:** Returns `yes` if `saving_status != "no known savings"`;
-otherwise, returns `no`.
-
+otherwise, returns `no`. \
 **Type:** String/Boolean
 
 ## Years employed
 
-**Name:** `employment`
-
-**Description:** The number of years that the customer has the current job
-
-**Type:** Categorical
-
+**Name:** `employment` \
+**Description:** The number of years that the customer has the current job \
+**Type:** Categorical \
 **Possible values:**
 * `"<1"`
 * `"1<=X<4"`
@@ -134,25 +115,21 @@ otherwise, returns `no`.
 
 ## Is employed
 
-**Name:** `is_employed`
-
+**Name:** `is_employed` \
 **Description:** Returns `yes` if `employment != "unemployed"`; otherwise,
-returns `no`
+returns `no` \
 
 ## Gender and marital status
 
-**Name:** `personal_status`
-
+**Name:** `personal_status` \
 **Description:** The combination of the customer's gender and marital status.
 It is against current regulations to use this information for credit risk
 analysis unless there is compelling evidence of their relevance to the problem.
 We demonstrate the lack of such evidence in our [gender irrelevance hypothesis]
 and in our [marital status irrelevance hypothesis]. However, the column will
 be used to evalute the final model's fairness across different gender and
-demographic groups.
-
-**Type:** Categorical
-
+demographic groups. \
+**Type:** Categorical \
 **Possible values:**
 * `"female div/dep/mar"`
 * `"female single"`
@@ -162,28 +139,22 @@ demographic groups.
 
 ## Gender
 
-**Name:** `gender`
-
+**Name:** `gender` \
 **Description:** Derived from the [gender and marital status column]. This 
 column isolates the gender from the marital status to be able to gauge how
-the model performs across genders.
-
-**Type:** String/Boolean
-
+the model performs across genders. \
+**Type:** String/Boolean \
 **Possible values:**
 * `"male"`
 * `"female"`
 
 ## Marital status
 
-**Name:** `marital_status`
-
+**Name:** `marital_status` \
 **Description:** Derived from [gender and marital status column]. This column
 isolates the marital status from the gender to be able to gauge how the model
-performs across different marital stata.
-
-**Type:** Categorical
-
+performs across different marital stata. \
+**Type:** Categorical \
 **Possible values:**
 * `"div/dep/mar"`
 * `"div/sep"`
@@ -192,14 +163,11 @@ performs across different marital stata.
 
 ## Other parties involved
 
-**Name:** `other_parties`
-
+**Name:** `other_parties` \
 **Description:** Describes whether there are other parties besides the costumer
 associated. This can show, for example, if there are any third party guarantors
-in case the customer defaults.
-
-**Type:** Categorical
-
+in case the customer defaults. \
+**Type:** Categorical \
 **Possible values:**
 * `"co applicant"`
 * `"guarantor"`
@@ -207,22 +175,17 @@ in case the customer defaults.
 
 ## Has guarantors
 
-**Name:** `has_garantors`
-
+**Name:** `has_garantors` \
 **Description:** Returns `yes` if `other_parties == "guarantor"`; otherwise,
-returns `no`.
-
+returns `no`. \
 **Type:** String/Boolean
 
 ## Property
 
-**Name:** `property_magnitude`
-
+**Name:** `property_magnitude` \
 **Description:** Describes the kind of property the customer has and that can
-be used as collateral for the loan.
-
-**Type:** Categorical
-
+be used as collateral for the loan. \
+**Type:** Categorical \
 **Possible values:**
 * `"car"`
 * `"life insurance"`
@@ -231,22 +194,17 @@ be used as collateral for the loan.
 
 ## Has property
 
-**Name:** `has_property`
-
+**Name:** `has_property` \
 **Description:** Returns `yes` if `property_magnitude != "no known property"`;
-otherwise, returns `no`.
-
+otherwise, returns `no`. \
 **Type:** String/Boolean
 
 ## Customer leverage
 
-**Name:** `other_payment_plans`
-
+**Name:** `other_payment_plans` \
 **Description:** Describes whether the customer has other debts, whether with
-the bank or with stores in general.
-
-**Type:** Categorical
-
+the bank or with stores in general. \
+**Type:** Categorical \
 **Possible values:**
 * `"bank"`
 * `"none"`
@@ -254,21 +212,16 @@ the bank or with stores in general.
 
 ## Is leveraged
 
-**Name:** `is_leveraged`
-
+**Name:** `is_leveraged` \
 **Description:** Returns `yes` if `other_payment_plans != "none"`; otherwise,
-returns `no`.
-
+returns `no`. \
 **Type:** String/Boolean
 
 ## Housing
 
-**Name:** `housing`
-
-**Description:** Describes the kind of housing the customer has.
-
-**Type:** Categorical
-
+**Name:** `housing` \
+**Description:** Describes the kind of housing the customer has. \
+**Type:** Categorical \
 **Possible values:**
 * `"for free"`
 * `"own"`
@@ -276,20 +229,15 @@ returns `no`.
 
 ## Owns house
 
-**Name:** `owns_house`
-
-**Description:** Returns `yes` if `housing == "own"`; otherwise, returns `no`.
-
+**Name:** `owns_house` \
+**Description:** Returns `yes` if `housing == "own"`; otherwise, returns `no`. \
 **Type:** String/Boolean
 
 ## Job status
 
-**Name:** `job`
-
-**Description:** Describes the kind of employee the customer is.
-
-**Type:** Categorical
-
+**Name:** `job` \
+**Description:** Describes the kind of employee the customer is. \
+**Type:** Categorical \
 **Possible values:**
 * `"high qualif/self emp/mgmt"`
 * `"skilled"`
@@ -298,97 +246,78 @@ returns `no`.
 
 ## Owns telephone
 
-**Name:** `own_telephone`
-
+**Name:** `own_telephone` \
 **Description:** Returns `yes` if the customer owns a telephone; otherwise,
-returns `none`.
-
+returns `none`. \
 **Type:** String/Boolean
 
 ## Is foreign worker
 
-**Name:** `foreign_worker`
-
+**Name:** `foreign_worker` \
 **Description:** Returns `yes` if the customer is not a citizen of the republic
 of Germany; otherwise, returns `no`. This variable is also illegal to use today
 without proper presentation of compelling evidence of its relevance and will be
 used to gauge the model's fairness amongst different demographic groups. See
-also [gender and marital status column].
-
+also [gender and marital status colum]. \
 **Type:** String/Boolean
 
 ## Target
 
-**Name:** `class`
-
+**Name:** `class` \
 **Description:** Returns `bad` if the customer has defaulted on the loan;
-otherwise, returns `good`.
-
+otherwise, returns `good`. \
 **Type:** String/Boolean
 
 ## Duration
 
-**Name:** `duration`
-
-**Description:** How many months the customer as to pay back the loan.
-
+**Name:** `duration` \
+**Description:** How many months the customer as to pay back the loan. \
 **Type:** Numeric
 
 ## Loan amount
 
-**Name:** `loan_amount`
-
+**Name:** `loan_amount` \
 **Description:** The monetary amount approved by the bank for that customer, in
 Deutsche Marks. This column will be used to weight samples for training, not as
-a predictive feature.
-
+a predictive feature. \
 **Type:** Numeric
 
 ## Installment commitment
 
-**Name:** `installment_commitment`
-
+**Name:** `installment_commitment` \
 **Description:** How much the installment's value consumes of the customer's
-income. It has only 4 distinct values.
-
+income. It has only 4 distinct values. \
 **Type:** Numeric
 
 ## Residence time
 
-**Name:** `residence_since`
-
+**Name:** `residence_since` \
 **Description:** The number of years the customer resides in Germany. It has
-only 4 distinct values.
-
+only 4 distinct values. \
 **Type:** Numeric
 
 ## Age
 
-**Name:** `age`
+**Name:** `age` \
 
 **Description:** The customer's age in years. This column is also illegal to
 use without proper presentation of compelling evidence of its relevance and thus
 will be used only to assess the model's fairness amongst different demographic
-groups. See also [gender and marital status column].
-
+groups. See also [gender and marital status column]. \
 **Type:** Numeric
 
 ## Existing credits
 
-**Name:** `existing_credits`
-
+**Name:** `existing_credits` \
 **Description:** The total amount of other existing credits the customer has,
-in Deutsche Marks. It has only 4 distinct values.
-
+in Deutsche Marks. It has only 4 distinct values. \
 **Type:** Numeric
 
 ## Number of dependents
 
-**Name:** `num_dependents`
-
+**Name:** `num_dependents` \
 **Description:** The number of dependents the customer has. It has only 2
-distinct values.
-
+distinct values. \
 **Type:** Numeric
 
 [GermanCreditCroissant.json]: GermanCreditCroissant.json
