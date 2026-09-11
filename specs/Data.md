@@ -1,114 +1,106 @@
 # Data service specification
 
-This file describes the project's data service public API.
+This file describes the project's data service API.
 
-**Summary:** The data service is implemented as a Python class responsible for
-reading, writing and validating data.
+**Summary:** The data service is implemented as a module of Python functions for
+reading, writing and validating data. The service implements domain models to
+represent data and provide validation.
 
-## Signature
+**File:** `src/german_credit/data.py`
 
-**Name:** `DataService` \
-**Description:** Implements data reading, writing and validation
+## Domain models
 
-## Attributes
+All types mentioned and not described in this file have one of these 
+characteristics:
 
-### `dataset`
+1. It is a primitive data type provided by Python's standard library;
+2. It is a data type provided by a third party library like Pydantic.
 
-**Type:** `Dataset` \
-**Description:** Container storing the dataset's URL, its destination file and
-its checksum
+### MD5ChecksumString
 
-### `model_schema`
+An annotated type based on a string with proper MD5 hexadecimal representation
+constraints.
 
-**Type:** `ModelSchema` \
-**Description:** Container storing the data contract regarding the model's
-inputs
+### Dataframe
 
-### `prediction_schema`
+An alias for a Polars DataFrame.
 
-**Type:** `PredictionSchema` \
-**Description:** Container storing the data contract regarding the model's
-predictions
+### Dataset
 
-## Methods
+An immutable Pydantic model representing dataset metadata.
 
-### `new`
+**Attributes:**
+- `url`: an object of type `HttpUrl` or `None` that represent's the dataset's
+  URL. It must accept a HTTP GET request if provided;
+- `checksum`: an object of type `MD5ChecksumString` or `None` that is used to 
+  verify the data's integrity if downloaded from the web;
+- `filepath`: an object of type `FilePath` that represents the data's location
+  on disk.
 
-**Type:** `classmethod` \
-**Description:** Class constructor that validates inputs \
-**Inputs:** [content]; [model_schema]; [prediction_schema] \
-**Outputs:** An object of class `DataService`
+## Behavior
 
-### `fetch`
+### new_dataset
 
-**Type:** `method` \
-**Description:** Retrieves data based on its [content]'s URL \
-**Outputs:** A `Dataset` object with the data and metadata
-
-**Preconditions:**
-- The [content]'s URL exists and accepts HTTP GET requests
-- The [content]'s checksum is a valid checksum string
-
-**Postconditions:**
-- The `Dataset` returned is not empty and has file integrity
-
-### `save`
-
-**Type:** `method` \
-**Description:** Write a `Dataset`'s content to disk as a Parquet file \
+Creates a new [Dataset] value based on the provided inputs.
 
 **Inputs:**
-- A `FilePath` object containing the address on disk to write
-- A `Dataset` to write to disk
+- `url`: dataset's URL
+- `checksum`: dataset's checksum for integrity verification
+- `filepath`: dataset's file path on disk
 
-**Preconditions:**
-- The `FilePath` must exist in disk and must be writable
-- The `Dataset` must not be empty
+**Outputs:** A dataset value. \
+**Guarantees:** The returned dataset has an URL that accepts HTTP GET requests,
+a valid MD5 checksum string and a file path that exists on disk. 
 
-**Postconditions:**
-- A Parquet file exists on disk in the specified location
+### fetch
 
-### `load`
+Fetches content from the web using the [Dataset] URL attribute.
 
-**Type:** `method` \
-**Description:** Loads a Parquet file from disk into a `Dataset` \
-**Inputs:** A `FilePath` address to the file \
-**Outputs:** A `Dataset` based on the `FilePath` provided \
-**Preconditions:** The `FilePath` must exist on disk and be readable \
-**Postconditions:** The `Dataset` is not empty
+**Inputs:** A dataset value. \
+**Outputs:** A [Dataframe] value. \
+**Requirements:** The [Dataset] attribute is validated. \
+**Guarantees:** The [Dataframe] object returned is validated by the dataset's
+checksum. If the dataset's file in its URL is compromised in some way, the
+function execution fails.
 
-### `load_model`
+### save
 
-**Type:** `method` \
-**Description:** Loads a `Model` from disk \
-**Inputs:** A `FilePath` address to the file in which the model is stored \
-**Outputs:** A `Model` with all its attributes \
-**Preconditions:** The `FilePath` must exist on disk and be readable \
-**Postconditions:** The loaded `Model` must have all its attributes
-
-### `dump`
-
-**Type:** `method` \
-**Description:** Writes a `Model` to disk as a pickle file
+Persists a [Dataframe] to disk using the [Dataset]'s `filepath` attribute. It
+saves the dataframe as a Parquet file.
 
 **Inputs:**
-- A `FilePath` address to the file to write
-- A `Model` to write to disk
+- A dataframe `df` to persist to disk
+- A dataset providing a path to write `df` to
 
-**Preconditions:**
-- The provided `FilePath` must be writable and exist on disk
-- The provided `Model` must be fitted
+**Requirements:**
+- `df` must exist and be a [Dataframe]
+- The [dataset] attribute must contain a `filepath` that exists in local storage
 
-**Postconditions:** There exists a file at `FilePath` containing the `Model`'s 
-data and its attributes
+**Guarantees:** There exists a Parquet file at the provided directory containing
+the data.
+
+### load
+
+Loads a [Dataframe] from disk using the [Dataset]'s `filepath` attribute. It
+loads Parquet files exclusively.
+
+**Inputs:** A dataset. \
+**Outputs:** A dataframe. \
+**Requirements:** The dataset's `filepath` must exist in storage. \
+**Guarantees:** The returned dataframe is not empty.
+
 
 ## See also
 
-[Domain] \
+[Shared] \
 [Modelling methodology]
 
-[Domain]: Domain.md
+[Shared]: Shared.md
 [Modelling methodology]: ../docs/Methodology.md
-[content]: #content
-[model_schema]: #model_schema
-[prediction_schema]: #prediction_schema
+[Dataset]: #dataset
+[dataset]: #dataset-1
+[new]: #new
+[fetch]: #fetch
+[save]: #save
+[load]: #load
+[Dataframe]: #dataframe
