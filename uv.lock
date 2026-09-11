@@ -251,6 +251,7 @@ dependencies = [
     { name = "polars" },
     { name = "pydantic" },
     { name = "scikit-learn" },
+    { name = "scipy" },
     { name = "xgboost" },
 ]
 
@@ -271,6 +272,7 @@ requires-dist = [
     { name = "polars", specifier = ">=1.44.1" },
     { name = "pydantic", specifier = ">=2.13.5" },
     { name = "scikit-learn", specifier = ">=1.9.0" },
+    { name = "scipy", specifier = ">=1.18.1" },
     { name = "xgboost", specifier = ">=3.4.1" },
 ]
 
