@@ -67,9 +67,9 @@ server. It must accept a HTTP GET request.
 A [MD5ChecksumString] value containing the dataset's checksum for integrity
 verification.
 
-### `content`
+### `file_path`
 
-A [DataFrame] value representing the dataset's information.
+A `FilePath` value representing the dataset's file location.
 
 ## `Model`
 

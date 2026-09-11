@@ -7,6 +7,7 @@ from pydantic import (
     BaseModel,
     ConfigDict,
     Field,
+    FilePath,
     HttpUrl,
     NonNegativeFloat,
     StringConstraints,
@@ -55,7 +56,7 @@ class Dataset(BaseModel):
 
     url: URL
     checksum: MD5ChecksumString
-    content: Dataframe
+    file_path: FilePath
 
 
 class Model(BaseModel):

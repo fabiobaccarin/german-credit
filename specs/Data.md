@@ -12,9 +12,9 @@ reading, writing and validating data.
 
 ## Attributes
 
-### `content`
+### `dataset`
 
-**Type:** `DatasetContent` \
+**Type:** `Dataset` \
 **Description:** Container storing the dataset's URL, its destination file and
 its checksum
 
