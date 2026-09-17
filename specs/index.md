@@ -31,3 +31,33 @@ df = data.read(dataset)
 data.write(df, dataset)
 ```
 
+## Module: model
+
+**File:** `src/german_credit/model.py`
+
+The `model` module implements domain models and functionality relating to
+machine learning models. The most important domain model is `Model`, which
+validates and stores information relating to the model, like list of features,
+preprocessing steps, training and testing logic, etc.
+
+With a `Model` object, the user can perform actions on it, like `preprocess`,
+`get_features`, `train`, `test`, `predict`, `evaluate` and `dump`.
+
+Example:
+
+```python
+from german_credit import model
+
+model_spec = model.Model(
+    name="foo",
+    features=["foo", "bar"],
+    preprocessor=some_sklearn_pipeline_object,
+    predictor="logistic-regression",
+    file="path-to-pickle.joblib"
+)
+
+fitted_model = model.train(model_spec)
+model.dump(fitted_model, model_spec)
+
+metrics = model.evaluate(model_spec)
+```
