@@ -41,7 +41,7 @@ validates and stores information relating to the model, like list of features,
 preprocessing steps, training and testing logic, etc.
 
 With a `Model` object, the user can perform actions on it, like `preprocess`,
-`get_features`, `train`, `test`, `predict`, `evaluate` and `dump`.
+`get_features`, `train`, `test`, `predict`, `evaluate`, `dump` and `dump_spec`.
 
 Example:
 
@@ -58,6 +58,7 @@ model_spec = model.Model(
 
 fitted_model = model.train(model_spec)
 model.dump(fitted_model, model_spec)
+model.dump_spec(model_spec)
 
 metrics = model.evaluate(model_spec)
 ```
