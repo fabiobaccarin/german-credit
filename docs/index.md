@@ -6,7 +6,7 @@ contents and purpose are.
 
 ## Dataset Croissant
 
-**File:** [GermanCreditCroissant.json]
+**File:** [german-credit-croissant.json]
 
 The file contains a complete description of the project's dataset as a
 standardized JSON file. A full description of this file can be found in the
@@ -25,7 +25,7 @@ the data.
 
 ## Dataset schema
 
-**File:** [GermanCreditSchema.md]
+**File:** [german-credit-schema.md]
 
 This file contains a complete description of all columns contained in the
 dataset, along with some auxiliary columns created in the project. The file thus
@@ -34,7 +34,7 @@ recommended for it.
 
 ## Hypotheses
 
-**File:** [Hypotheses.md]
+**File:** [hypotheses.md]
 
 This file lists and briefly describes each hypothesis proposed for the project,
 alongside a marker about whether they were falsified or not and the evidence
@@ -42,14 +42,14 @@ for their falsification.
 
 ## Methodology
 
-**File:** [Methodology.md]
+**File:** [methodology.md]
 
 Defines the modelling methodology adopted for developing the credit score model.
 This is the authority file for statistical techniques, assumptions and design
 principles that drive code specifications.
 
-[GermanCreditCroissant.json]: GermanCreditCroissant.json
+[german-credit-croissant.json]: german-credit-croissant.json
 [Croissant's specification page]: https://docs.mlcommons.org/croissant/docs/croissant-spec-1.1.html
-[GermanCreditSchema.md]: GermanCreditSchema.md
-[Hypotheses.md]: Hypotheses.md
-[Methodology.md]: Methodology.md
+[german-credit-schema.md]: german-credit-schema.md
+[hypotheses.md]: hypotheses.md
+[methodology.md]: methodology.md
