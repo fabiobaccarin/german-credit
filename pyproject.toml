@@ -17,6 +17,7 @@ dependencies = [
 
 [project.scripts]
 german-credit = "german_credit:main"
+fetch-raw-data = "german_credit.data:_fetch_and_save"
 
 [build-system]
 requires = ["uv_build>=0.12.10,<0.13.0"]

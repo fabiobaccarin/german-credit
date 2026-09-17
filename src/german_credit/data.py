@@ -40,7 +40,7 @@ def _get(url: HttpUrl) -> bytes:
 
 
 def _validate_checksum(
-    content: bytes, checksum: MD5ChecksumString | None
+    *, content: bytes, checksum: MD5ChecksumString | None
 ) -> None:
     if checksum is not None:
         actual = hashlib.md5(content).hexdigest()
@@ -51,6 +51,7 @@ def _validate_checksum(
 
 
 def new_dataset(
+    *,
     filepath: FilePath,
     url: HttpUrl | None = None,
     checksum: MD5ChecksumString | None = None,
@@ -68,14 +69,14 @@ def fetch(dataset: Dataset) -> Dataframe:
         raise ValueError("A dataset URL is required to fetch data.")
 
     content = _get(dataset.url)
-    _validate_checksum(content, dataset.checksum)
+    _validate_checksum(content=content, checksum=dataset.checksum)
     dataframe = pl.read_parquet(io.BytesIO(content))
     if dataframe.is_empty():
         raise ValueError("Fetched dataset is empty.")
     return dataframe
 
 
-def save(df: Dataframe, dataset: Dataset) -> None:
+def save(*, df: Dataframe, dataset: Dataset) -> None:
     """Persist a Polars dataframe as a Parquet file."""
     if not isinstance(df, pl.DataFrame):
         raise TypeError("df must be a Polars DataFrame.")
@@ -92,3 +93,7 @@ def load(dataset: Dataset) -> Dataframe:
     if dataframe.is_empty():
         raise ValueError("Dataset is empty.")
     return dataframe
+
+
+def _fetch_and_save() -> None:
+    """Fetches data and saves it. Meant to be run as a project script"""
