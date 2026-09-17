@@ -1,7 +1,7 @@
 # Dataset dictionary for German Credit dataset
 
 This file provides column-wise metadata for each column in the project's
-dataset. All information is extracted from the [GermanCreditCroissant.json]
+dataset. All information is extracted from the [german-credit-croissant.json]
 file, but organized in a way to facilitate consultation by humans and
 complemented with outside information when needed.
 
@@ -320,7 +320,7 @@ in Deutsche Marks. It has only 4 distinct values. \
 distinct values. \
 **Type:** Numeric
 
-[GermanCreditCroissant.json]: GermanCreditCroissant.json
+[german-credit-croissant.json]: german-credit-croissant.json
 [loan's purpose column]: #purpose-of-the-loan
 [credit for consumption hypothesis]: Hypotheses.md
 [gender irrelevance hypothesis]: Hypotheses.md
