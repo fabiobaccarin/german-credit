@@ -55,3 +55,4 @@ local storage designed by the `Dataset` file path.
 [Dataset]: #domain-model-dataset
 [MD5ChecksumString]: #domain-model-md5checksumstring
 [read]: #action-read
+[write]: #action-write
